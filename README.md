@@ -52,3 +52,14 @@ myProduct := model.Product{}
 storage.DB().First(&myProduct, 3)
 fmt.Println(myProduct)
 ```
+
+# Actualizar un Producto
+
+```go
+myProduct := model.Product{}
+myProduct.ID = 3
+
+storage.DB().Model(&myProduct).Updates(
+    model.Product{Name: "Curso de Java", Price: 120},
+)
+```

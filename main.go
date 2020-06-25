@@ -1,18 +1,18 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/AJRDRGZ/go-db-gorm/model"
 	"github.com/AJRDRGZ/go-db-gorm/storage"
 )
 
 func main() {
-	driver := storage.MySQL
+	driver := storage.Postgres
 	storage.New(driver)
 
 	myProduct := model.Product{}
+	myProduct.ID = 3
 
-	storage.DB().First(&myProduct, 3)
-	fmt.Println(myProduct)
+	storage.DB().Model(&myProduct).Updates(
+		model.Product{Name: "Curso de Java", Price: 120},
+	)
 }
