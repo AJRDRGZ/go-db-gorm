@@ -53,7 +53,7 @@ storage.DB().First(&myProduct, 3)
 fmt.Println(myProduct)
 ```
 
-# Actualizar un Producto
+## Actualizar un Producto
 
 ```go
 myProduct := model.Product{}
@@ -62,4 +62,20 @@ myProduct.ID = 3
 storage.DB().Model(&myProduct).Updates(
     model.Product{Name: "Curso de Java", Price: 120},
 )
+```
+
+## Eliminar productos
+
+```go
+// Delete Soft
+myProduct := model.Product{}
+myProduct.ID = 4
+
+storage.DB().Delete(&myProduct)
+
+// Delete Permanent
+myProduct := model.Product{}
+myProduct.ID = 4
+
+storage.DB().Unscoped().Delete(&myProduct)
 ```
