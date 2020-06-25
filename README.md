@@ -79,3 +79,24 @@ myProduct.ID = 4
 
 storage.DB().Unscoped().Delete(&myProduct)
 ```
+
+## Crear llaves foraneas
+
+```go
+storage.DB().Model(&model.InvoiceItem{}).AddForeignKey("product_id", "products(id)", "RESTRICT", "RESTRICT")
+
+storage.DB().Model(&model.InvoiceItem{}).AddForeignKey("invoice_header_id", "invoice_headers(id)", "RESTRICT", "RESTRICT")
+```
+
+## Crear Factura (tx)
+
+```go
+invoice := model.InvoiceHeader{
+    Client: "Alvaro Felipe",
+    InvoiceItems: []model.InvoiceItem{
+        {ProductID: 3},
+    },
+}
+
+storage.DB().Create(&invoice)
+```

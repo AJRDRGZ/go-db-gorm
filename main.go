@@ -6,18 +6,15 @@ import (
 )
 
 func main() {
-	driver := storage.Postgres
+	driver := storage.MySQL
 	storage.New(driver)
 
-	// Delete Soft
-	myProduct := model.Product{}
-	myProduct.ID = 4
+	invoice := model.InvoiceHeader{
+		Client: "Alvaro Felipe",
+		InvoiceItems: []model.InvoiceItem{
+			{ProductID: 3},
+		},
+	}
 
-	storage.DB().Delete(&myProduct)
-
-	// Delete Permanent
-	myProduct = model.Product{}
-	myProduct.ID = 4
-
-	storage.DB().Unscoped().Delete(&myProduct)
+	storage.DB().Create(&invoice)
 }
