@@ -8,13 +8,11 @@ import (
 )
 
 func main() {
-	driver := storage.Postgres
+	driver := storage.MySQL
 	storage.New(driver)
 
-	products := make([]model.Product, 0)
-	storage.DB().Find(&products)
+	myProduct := model.Product{}
 
-	for _, product := range products {
-		fmt.Printf("%d - %s\n", product.ID, product.Name)
-	}
+	storage.DB().First(&myProduct, 3)
+	fmt.Println(myProduct)
 }

@@ -43,3 +43,12 @@ for _, product := range products {
     fmt.Printf("%d - %s\n", product.ID, product.Name)
 }
 ```
+
+## Consultar un solo producto
+
+```go
+myProduct := model.Product{}
+
+storage.DB().First(&myProduct, 3)
+fmt.Println(myProduct)
+```
