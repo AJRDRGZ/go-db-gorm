@@ -32,3 +32,14 @@ storage.DB().Create(&product1)
 storage.DB().Create(&product2)
 storage.DB().Create(&product3)
 ```
+
+## Consultar todos los productos
+
+```go
+products := make([]model.Product, 0)
+storage.DB().Find(&products)
+
+for _, product := range products {
+    fmt.Printf("%d - %s\n", product.ID, product.Name)
+}
+```

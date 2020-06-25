@@ -1,32 +1,20 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/AJRDRGZ/go-db-gorm/model"
 	"github.com/AJRDRGZ/go-db-gorm/storage"
 )
 
 func main() {
-	driver := storage.MySQL
+	driver := storage.Postgres
 	storage.New(driver)
 
-	product1 := model.Product{
-		Name:  "Curso de Go",
-		Price: 120,
-	}
+	products := make([]model.Product, 0)
+	storage.DB().Find(&products)
 
-	obs := "testing with Go"
-	product2 := model.Product{
-		Name:         "Curso de Testing",
-		Price:        150,
-		Observations: &obs,
+	for _, product := range products {
+		fmt.Printf("%d - %s\n", product.ID, product.Name)
 	}
-
-	product3 := model.Product{
-		Name:  "Curso de Python",
-		Price: 200,
-	}
-
-	storage.DB().Create(&product1)
-	storage.DB().Create(&product2)
-	storage.DB().Create(&product3)
 }
